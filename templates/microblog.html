@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+
+    <link rel="stylesheet" href="/static/css/microblog_style.css" />
+
+<body>
+  <main class="main">
+    <section>
+      <h2>Add new entry</h2>
+      <form class="form" method="POST">
+        <p class="form__input">
+          <label for="entry" class="form__label">Entry contents:</label>
+          <textarea name="content" id="entry" class="form__textarea"></textarea>
+        </p>
+        <button type="submit" class="form__submit">Add entry</button>
+      </form>
+    </section>
+    <section>
+      <h2>Recent posts</h2>
+      {% for entry in entries %}
+        <article class="entry">
+          <div>
+            <h2 class="entry__title">{{ entry[0] | truncate(30, true) }}</h2>
+            <time class="entry__date" datetime="{{ entry[1] }}">• {{ entry[2] }}</time>
+          </div>
+          <p class="entry__content">
+            {{ entry[0] }}
+          </p>
+        </article>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+
+
+{% endblock %}

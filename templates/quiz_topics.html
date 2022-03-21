@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+<div class="container py-4">
+
+    {% for topic in topics %}
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <h3 class="h3 fw-bold">{{ topic }}</h3>
+            <a href="{{ url_for("quiz", quiz_name=topic, random=false) }}"><button class="btn btn-success btn-lg" type="button">Go in order</button></a>
+            <a href='{{ url_for("quiz", quiz_name=topic, random=true) }}'><button class="btn btn-warning btn-lg" type="button">Go random</button></a>
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
