@@ -1,10 +1,11 @@
 let currPos = 0;
+
 async function showQuestion(questionPos, category, question_set) {
 
     if (questionPos < 0)
         currPos = question_set.length - 1;
     else
-        currPos = (questionPos + (question_set.length - 1)) % (question_set.length - 1) ;
+        currPos = (questionPos + (question_set.length)) % (question_set.length) ;
 
     const qNum = document.getElementById("questionNumber");
     qNum.innerText = (currPos+1).toString() + "/" + question_set.length.toString();
@@ -55,11 +56,10 @@ function showAnswer(questionPos, question_set) {
 
     if (status === "Show Answer") {
         getButton.innerText = "Hide Answer";
-        for (let i=1; i<question_set.length; i++) {
+        for (let i=0; i<question_set[questionPos].length; i++) {
             answer = question_set[questionPos][i]
-            idName = 'a' + i.toString();
+            idName = 'a' + (i+1).toString();
             inputSpace = document.getElementById(idName);
-
             if (answer !== "-1")
                 inputSpace.setAttribute("placeholder", answer);
         }
@@ -67,8 +67,8 @@ function showAnswer(questionPos, question_set) {
 
     else {
         getButton.innerText = "Show Answer";
-        for (let i=1; i<question_set.length; i++) {
-            idName = 'a' + i.toString();
+        for (let i=0; i<question_set[questionPos].length; i++) {
+            idName = 'a' + (i+1).toString();
             inputSpace = document.getElementById(idName);
             answer = question_set[questionPos][i];
             if (answer !== "-1")
@@ -79,9 +79,9 @@ function showAnswer(questionPos, question_set) {
 
 function checkAnswer(questionPos, question_set) {
 
-    for (let i=1; i<question_set.length; i++) {
+    for (let i=0; i<question_set[questionPos].length; i++) {
 
-        var inputSpace = document.getElementById("a" + i.toString());
+        var inputSpace = document.getElementById("a" + (i+1).toString());
         var userAns = inputSpace.value;
         var question = question_set[questionPos][0];
         var correctAns = question_set[questionPos][i].split(",");

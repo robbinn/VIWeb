@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+    <script src="../static/js/p5.min.js"></script>
+    <script src="../static/js/sliding_puzzle.js"></script>
+    <script>
+    document.title = "Victor's Sliding Puzzle"
+    </script>
+    <style>
+    html, body {
+      height: 100%;
+    }
+
+    main,img {
+      margin-right: 40pt;
+      display: flex;
+
+      /* This centers horizontally. */
+      justify-content: center;
+
+      /* This centers vertically. */
+      align-items: center;
+    }
+
+    h2,button {
+        text-align: center;
+    }
+    </style>
+
+    <main class="container">
+
+    <img src="" id="pic" alt="puzzle" width="600" height="600"><br>
+{#     <img src="../static/asset/sp1.png" id="pic" alt="puzzle1" width="600" height="600"><br>#}
+
+    </main>
+
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <button type="button" class="btn btn-primary" onclick="window.location.reload();">Restart</button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <h2 id="solve"></h2>
+
+
+{% endblock %}

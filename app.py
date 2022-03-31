@@ -12,6 +12,14 @@ def create_app():
     app = Flask(__name__)
     client = MongoClient(os.environ.get("MONGODB_URI"))
 
+    @app.route('/profile')
+    def profile():
+        return render_template("profile.html")
+
+    @app.route('/slidingpuzzle')
+    def sliding_puzzle():
+        return render_template("sliding_puzzle.html")
+
     @app.route('/quicksort')
     def quick_sort():
         return render_template("quick_sort.html")
