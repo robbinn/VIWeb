@@ -16,6 +16,10 @@ def create_app():
     def profile():
         return render_template("profile.html")
 
+    @app.route('/weather')
+    def weather():
+        return render_template("weather.html")
+
     @app.route('/slidingpuzzle')
     def sliding_puzzle():
         return render_template("sliding_puzzle.html")
