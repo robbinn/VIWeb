@@ -51,7 +51,7 @@ def create_app():
         for question in question_set:
             category = list(question.keys())[1:]
             temp = []
-            for i in range(len(category) - 1):
+            for i in range(len(category)):
                 temp.append(question[category[i]])
             answer_set.append(temp)
 
