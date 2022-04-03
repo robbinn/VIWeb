@@ -6,11 +6,14 @@ from pymongo import MongoClient
 import os
 import random
 
-
 def create_app():
     load_dotenv("MONGODB_URI")
     app = Flask(__name__)
     client = MongoClient(os.environ.get("MONGODB_URI"))
+
+    @app.route('/graphingcalculator')
+    def graphing_calculator():
+        return render_template("graphing_calculator.html")
 
     @app.route('/profile')
     def profile():

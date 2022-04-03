@@ -50,6 +50,14 @@ function mousePressed() {
     move(i, j, board);
 }
 
+function touchStarted() {
+    let i = min(floor(mouseX / w),rows-1);
+    let j = min(floor(mouseY / h),cols-1);
+    i = max(i,0);
+    j = max(j,0);
+    move(i, j, board);
+}
+
 function draw() {
     background(0);
 
