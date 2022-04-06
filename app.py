@@ -8,46 +8,46 @@ import random
 
 def create_app():
     load_dotenv("MONGODB_URI")
-    app = Flask(__name__)
+    application = Flask(__name__)
     client = MongoClient(os.environ.get("MONGODB_URI"))
 
-    @app.route('/graphingcalculator')
+    @application.route('/graphingcalculator')
     def graphing_calculator():
         return render_template("graphing_calculator.html")
 
-    @app.route('/profile')
+    @application.route('/profile')
     def profile():
         return render_template("profile.html")
 
-    @app.route('/weather')
+    @application.route('/weather')
     def weather():
         return render_template("weather.html")
 
-    @app.route('/slidingpuzzle')
+    @application.route('/slidingpuzzle')
     def sliding_puzzle():
         return render_template("sliding_puzzle.html")
 
-    @app.route('/quicksort')
+    @application.route('/quicksort')
     def quick_sort():
         return render_template("quick_sort.html")
 
-    @app.route('/')
+    @application.route('/')
     def home():
         return render_template("home.html")
 
-    @app.route('/quiz/topics')
+    @application.route('/quiz/topics')
     def quiz_topics():
-        app.db = client['quiz']
-        topics = app.db.list_collection_names()
+        application.db = client['quiz']
+        topics = application.db.list_collection_names()
 
         return render_template("quiz_topics.html", topics=topics)
 
-    @app.route('/quiz/<quiz_name>', methods=['GET'])
+    @application.route('/quiz/<quiz_name>', methods=['GET'])
     def quiz(quiz_name):
         r = request.args.get("random")
         category = []
         answer_set = []
-        question_set = app.db[quiz_name].find({})
+        question_set = application.db[quiz_name].find({})
         for question in question_set:
             category = list(question.keys())[1:]
             temp = []
@@ -60,22 +60,22 @@ def create_app():
 
         return render_template("quiz_app.html", answer_set=answer_set, category=category)
 
-    @app.route('/microblog', methods=["GET", "POST"])
+    @application.route('/microblog', methods=["GET", "POST"])
     def microblog():  # put application's code here
-        app.db = client['microblog']
+        application.db = client['microblog']
 
         if request.method == 'POST':
             entry_content = request.form.get("content")
             formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
-            app.db['entries'].insert_one({"content": entry_content, 'date': formatted_date})
+            application.db['entries'].insert_one({"content": entry_content, 'date': formatted_date})
 
         entries_with_date = [(
             entry["content"],
             entry["date"],
             datetime.datetime.strptime(entry["date"], "%Y-%m-%d").strftime("%b %d")
-        ) for entry in app.db['entries'].find({})
+        ) for entry in application.db['entries'].find({})
         ]
 
         return render_template('microblog.html', entries=entries_with_date)
 
-    return app
+    return application
