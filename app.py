@@ -11,6 +11,10 @@ def create_app():
     app = Flask(__name__)
     client = MongoClient(os.environ.get("MONGODB_URI"))
 
+    @app.route('/drawingclassification')
+    def drawing_classification():
+        return render_template("drawing_classification.html")
+
     @app.route('/graphingcalculator')
     def graphing_calculator():
         return render_template("graphing_calculator.html")

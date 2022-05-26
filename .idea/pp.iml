@@ -11,6 +11,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="p5" level="application" />
     <orderEntry type="library" name="@types/p5" level="application" />
+    <orderEntry type="library" name="ml5" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
